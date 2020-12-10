@@ -2,6 +2,7 @@ package main
 
 import (
 	"ginEssential/controller"
+	"ginEssential/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -9,7 +10,8 @@ import (
 func CollectRouter(r *gin.Engine) *gin.Engine {
 	r.POST("/api/auth/register", controller.Register)
 	r.POST("/api/auth/login", controller.Login)
+	r.GET("/api/auth/info", middleware.AuthMiddleware(), controller.Info)
 
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	//r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 	return r
 }

@@ -2,6 +2,7 @@ package controller
 
 import (
 	"ginEssential/common"
+	"ginEssential/dto"
 	"ginEssential/model"
 	"ginEssential/util"
 	"log"
@@ -110,6 +111,12 @@ func Login(ctx *gin.Context) {
 		"msg":  "登录成功",
 	})
 
+}
+
+func Info(ctx *gin.Context) {
+	user, _ := ctx.Get("user")
+
+	ctx.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"user": dto.ToUserDto(user.(model.User))}})
 }
 
 func isTelephoneExist(db *gorm.DB, telephone string) bool {
