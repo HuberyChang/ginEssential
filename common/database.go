@@ -3,35 +3,38 @@ package common
 import (
 	"fmt"
 
-	"gorm.io/driver/mysql"
+	"github.com/spf13/viper"
 	"gorm.io/gorm"
+
+	"gorm.io/driver/mysql"
 )
 
 var DB *gorm.DB
 
-func InitDB() *gorm.DB {
-	host := "localhost"
-	port := "3306"
-	database := "ginessential"
-	username := "root"
-	pasword := "root"
-	charset := "utf8mb4"
-	loc := "Local"
+func InitDB() {
+	//host := "localhost"
+	//port := "3306"
+	//database := "ginessential"
+	//username := "root"
+	//pasword := "root"
+	//charset := "utf8mb4"
+	//loc := "Local"
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=%s",
-		username,
-		pasword,
-		host,
-		port,
-		database,
-		charset,
-		loc)
-	//viper.Get("dataSource.user"),
-	//viper.Get("dataSource.password"),
-	//viper.Get("dataSource.host"),
-	//viper.Get("dataSource.port"),
-	//viper.Get("dataSource.database"),
-	//viper.Get("dataSource.charset"),
-	//viper.Get("dataSource.loc"),
+		//username,
+		//pasword,
+		//host,
+		//port,
+		//database,
+		//charset,
+		//loc
+		viper.GetString("dataSource.user"),
+		viper.GetString("dataSource.password"),
+		viper.GetString("dataSource.host"),
+		viper.GetString("dataSource.port"),
+		viper.GetString("dataSource.database"),
+		viper.GetString("dataSource.charset"),
+		viper.GetString("dataSource.loc"),
+	)
 
 	db, err := gorm.Open(mysql.New(mysql.Config{
 		DSN:                       dsn,
@@ -45,7 +48,6 @@ func InitDB() *gorm.DB {
 		panic("failed to connect database,err:" + err.Error())
 	}
 	DB = db
-	return db
 }
 
 func GetDB() *gorm.DB {
