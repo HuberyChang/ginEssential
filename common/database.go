@@ -12,13 +12,13 @@ import (
 var DB *gorm.DB
 
 func InitDB() {
-	//host := "localhost"
-	//port := "3306"
-	//database := "ginessential"
-	//username := "root"
-	//pasword := "root"
-	//charset := "utf8mb4"
-	//loc := "Local"
+	// host := "localhost"
+	// port := "3306"
+	// database := "ginessential"
+	// username := "root"
+	// pasword := "root"
+	// charset := "utf8mb4"
+	// loc := "Local"
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=True&loc=%s",
 		//username,
 		//pasword,
